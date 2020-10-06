@@ -1,6 +1,6 @@
 \documentclass[unknownkeysallowed]{beamer}
 \usepackage[french,english]{babel}
-\input{beamer_js}
+\input{Beamer_js}
 \input{shortcuts_js}
 %\usepackage{./OrganizationFiles/tex/sty/shortcuts_js}
 \usepackage{csquotes}
@@ -32,7 +32,7 @@
 }
 
 \color{marron}
-\textbf{Chapter 4 : ANOVA}
+\textbf{Chapter 4 : ANOVA 2 Factors}
 \end{center}
 
 \vspace{0.5cm}
@@ -49,6 +49,117 @@ Université de Montpellier \\
 \includegraphics[width=0.13\textwidth]{Logo.pdf}
 \end{frame}
 
+\begin{frame}{ANOVA 2 Factors}
+\begin{itemize}
+    \item Factor 1: I Classes
+    \item Factor 2: J Classes
+\end{itemize}
 
+Example: Judges tasting wines
 
+\begin{center}
+\begin{tabular}{ |p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|  }
+\hline
+ & Wine 1 & Wine 2 & Wine 3 \\
+\hline
+Judge 1 & [6,7,8] & [1,2,3,5] & [1,3] \\
+\hline
+Judge 2 & [3,8,9] & [1] & [1,2,3] \\
+\hline
+Judge 3 & [5,7,8] & [2,5] & [1,3] \\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Model}
+Our model:
+
+$$
+y_{i,j,k}\sim \mathcal{N}(\mu_{i,j},\sigma^2)
+$$
+\begin{itemize}
+    \item $y$ are iid 
+    \item $k=1,\dots,n_j$
+    \item $\forall i= 1,\dots I$
+    \item $\forall j= 1,\dots J$
+\end{itemize}
+Cases:
+\begin{itemize}
+    \item $y_{1,1,1}=6$
+    \item $y_{1,1,2}=7$
+    \item $y_{1,1,3}=8$
+    \item $y_{2,2,1}=1$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Model}
+$$
+y_{i,j,k}=\mu + \alpha_i +\beta_j + \epsilon_{i,j}
+$$
+
+\begin{itemize}
+    \item $\mu$: Golbal effect
+    \item $\alpha_i$: First factor effect
+    \item $\epsilon_{i,j}$: Second factor effect
+\end{itemize}
+
+$$
+cov(\epsilon_{i,j,k},\epsilon_{i^\prime,j^\prime,k^\prime}=\sigma^2\delta_{i,i^\prime}delta_{j,j^\prime}delta_{k,k^\prime}
+$$
+\end{frame}
+
+\begin{frame}{Balanced experiment plan}
+$\forall i=1,\dots,I$, $\forall j=1,\dots,J$: $n_{i,j}=k$
+$$
+n=IJK
+$$
+\begin{itemize}
+    \item $n_{i,j}$: observations for each $(i,j)$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Design matrix}
+Our design matrix:
+
+$$
+X=[\mathcal{I}_n,\mathbb{I}_{C_1},\dots,\mathbb{I}_{C_I}\mathbb{I}_{D_1},\dots,\mathbb{I}_{D_J}]
+$$
+
+\begin{itemize}
+    \item $\mathbb{I}_{C_I}$: Indicators of modalities of the first factors
+    \item $\mathbb{I}_{D_J}$: Indicators of modalities of the second factors
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Design matrix}
+$$X=\left[\begin{array}{llllll}
+1 & 0 & 0 & 1 & 0 & 0\\
+1 & 0 & 0 & 0 & 1 & 0\\
+1 & 0 & 0 & 1 & 0 & 0\\
+1 & 0 & 0 & 1 & 0 & 0\\
+1 & 0 & 0 & 0 & 0 & 0\\
+1 & 0 & 0 & 0 & 0 & 0\\
+1 & 0 & 0 & 0 & 0 & 0\\
+. & . & . & . & . & .\\
+. & . & . & . & . & .\\
+. & . & . & . & . & .\\
+\end{array}\right]\hspace{1cm} y=\left[\begin{array}{l}
+6\\
+7\\
+8\\
+1\\
+2\\
+3\\
+1\\
+.\\
+.\\
+.\\
+\end{array}\right]
+$$
+\begin{itemize}
+    \item 27 rows
+    \item Columns of X: $(J_1,J_2,J_3,V_1,V_2,V_3)$
+\end{itemize}
+\end{frame}
 \end{document}
