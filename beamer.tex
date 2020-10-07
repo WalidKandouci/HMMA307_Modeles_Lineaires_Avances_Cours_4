@@ -206,5 +206,30 @@ For this problem we get the following Lagrangian:
 \end{frame}
 
 
+\begin{frame}{}
+We should solve the following system:
+\vspace{1cm}
+$$\left\{\begin{array}{l}
+\frac{\partial \mathcal{L}}{\partial \mu}=0 \\
+\frac{\partial \mathcal{L}}{\partial \alpha}=0 \\
+\frac{\partial \mathcal{L}}{\partial \beta}=0 \\
+\frac{\partial \mathcal{L}}{\partial \lambda_{\alpha}}=0 \\
+\frac{\partial \mathcal{L}}{\partial \lambda_{\beta}}=0
+\end{array}\right.$$
+\end{frame}
+
+
+\begin{frame}{}
+We get as results:
+\vspace{0.5cm}
+$$\frac{\partial \mathcal{L}}{\partial \mu}=0 \Longrightarrow n \widehat{\mu}=\sum_{i=1}^{I} \sum_{j=1}^{J} \sum_{k=1}^{K} y_{i, j, k} \Longrightarrow \widehat{\mu}=\bar{y}_{n}$$
+\vspace{0.5cm}
+$$\hspace{0.8cm}\frac{\partial \mathcal{L}}{\partial \alpha}=0 \Longrightarrow \forall i \in[1, I], \quad \widehat{\alpha}_{i}=& \underbrace{\bar{y}_{i,:,}}_{=\frac{1}{J K} \sum_{j=1}^{N} \sum_{k=1}^{K} y_{i, j, k}}-\widehat{\mu}$$
+\vspace{0.5cm}
+$$\hspace{0.8cm}\frac{\partial \mathcal{L}}{\partial \beta}=0 \Longrightarrow \forall j \in[1, J], \widehat{\beta}_{j}=& \underbrace{\bar{y}_{:, j, \vdots}}_{=\frac{1}{I K}} \sum_{i=1}^{I} \sum_{k=1}^{K} y_{i, j, k}-\widehat{\mu}$$
+\end{frame}
+
+
+
 
 \end{document}
