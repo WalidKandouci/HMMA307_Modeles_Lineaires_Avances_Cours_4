@@ -10,16 +10,36 @@
 \addbibresource{Bibliographie.bib}
 \usepackage{enumerate}
 
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[english]{babel}
+\uselanguage{French}
+\usepackage{dsfont}
+\usepackage{bbold}
+\usepackage{stmaryrd}
+\languagepath{French}
+\usepackage{xcolor}
+
+\usepackage{pgf}
+\usepackage{tikz}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \begin{document}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%             Headers               %%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[noframenumbering]
 \thispagestyle{empty}
 \bigskip
@@ -49,108 +69,194 @@ Université de Montpellier \\
 \includegraphics[width=0.13\textwidth]{Logo.pdf}
 \end{frame}
 
-\begin{frame}{ANOVA 2 Factors}
-\begin{itemize}
-    \item Factor 1: I Classes
-    \item Factor 2: J Classes
-\end{itemize}
 
-Example: Judges tasting wines
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%             Headers               %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% plan de la présentation
+\begin{frame}
+\frametitle{Summary}
+\tableofcontents
+\end{frame}
+
+
+\section{Introduction}
+\begin{frame}
+\frametitle{Introduction}
+We discussed in the previous paragraph the one-way ANOVA and its uses.
+%that examines the influence of one categorical independent variables on another continuous dependent variable.\\
+\\
+In this paragraph, we will be looking at two-way ANOVA, an extension of the one-way ANOVA that examines the influence of two different categorical independent variables on one continuous dependent variable. \\
+The two-way ANOVA not only aims at assessing the main effect of each independent variable but also if there is any interaction between them.
+\end{frame}
+
+
+
+
+
+
+\section{Exemple}
+
+
+\begin{frame}
+\frametitle{introductory example:}
+Suppose we have two judges who do a tasting of 2 different wines, called Wine 1 and Wine 2 such as:\\
+- Judge 1 does 7 tastings: 3 for Wine 1 and 4 for Wine 2.\\
+- The Judge 2 does 4 tastings: 3 for Wine 1 and 1 for Wine 2.
+\end{frame}
+
+\begin{frame}
+\frametitle{introductory example:}
+We summarize the example in the form of the following table:\\
 
 \begin{center}
-\begin{tabular}{ |p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|  }
+\begin{tabular}{ |c|c|c|  }
 \hline
- & Wine 1 & Wine 2 & Wine 3 \\
+ & Wine 1 & Wine 2  \\
 \hline
-Judge 1 & [6,7,8] & [1,2,3,5] & [1,3] \\
+Judge 1 & [6,7,8] & [1,2,3,5]  \\
 \hline
-Judge 2 & [3,8,9] & [1] & [1,2,3] \\
-\hline
-Judge 3 & [5,7,8] & [2,5] & [1,3] \\
+Judge 2 & [3,8,4] & [1]  \\
+
 \hline
 \end{tabular}
 \end{center}
+
+
+
+
+
+
+
+
+
+If factor 1 is Judge 2 and factor 2 is Win 1, we have :$$y_{211}=3, y_{212}=8, y_{213}=4 $$
+Here, we have: \\$$n= n_{1 1}+n_{1 2}+n_{2 1}+n_{2 2}=3+4+3+1=11$$
+we must adapt the table so as to have $n_{ij}$ = constant fixed $\forall i,j\in[\![1, 2]\!]$.
+ This is done either by eliminating or adding elements.
+
 \end{frame}
 
-\begin{frame}{Model}
-Our model:
+% partie 2 : page 2
 
-$$
-y_{i,j,k}\sim \mathcal{N}(\mu_{i,j},\sigma^2)
-$$
-\begin{itemize}
-    \item $y$ are iid 
-    \item $k=1,\dots,n_j$
-    \item $\forall i= 1,\dots I$
-    \item $\forall j= 1,\dots J$
-\end{itemize}
-Cases:
-\begin{itemize}
-    \item $y_{1,1,1}=6$
-    \item $y_{1,1,2}=7$
-    \item $y_{1,1,3}=8$
-    \item $y_{2,2,1}=1$
-\end{itemize}
+\subsection{}
+\begin{frame}
+\frametitle{}
+Two factors :\\
+$\bullet$ Factor $1$ : $I$ levels / $I$ classes.\\
+$\bullet$ Factor $2$ : $J$ levels / $I$ classes.\\
+
+$n_{ij}$ : nombre of repetitions / observations of factor 1 in the $i$ classe and to factor $2$ in $j$ class.\\
+
+We obtain the following constraints :
+$$n=\sum_{i=1}^{I} \sum_{j=1}^{J} n_{i j}$$
 \end{frame}
 
-\begin{frame}{Model}
-$$
-y_{i,j,k}=\mu + \alpha_i +\beta_j + \epsilon_{i,j}
-$$
 
-\begin{itemize}
-    \item $\mu$: Golbal effect
-    \item $\alpha_i$: First factor effect
-    \item $\epsilon_{i,j}$: Second factor effect
-\end{itemize}
 
-$$
-cov(\epsilon_{i,j,k},\epsilon_{i^\prime,j^\prime,k^\prime}=\sigma^2\delta_{i,i^\prime}delta_{j,j^\prime}delta_{k,k^\prime}
-$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Model}
+\begin{frame}{Model equation}
+   
+  
+  
+\begin{alertblock}{Model: }
+  $$\left.y_{i, j, k} \stackrel{i i d}{\sim} \mathcal{N}\left(\mu_{i j}, \sigma^{2}\right), \quad \forall i \in[\![1, I]\!] , \forall j \in\left[\![1, J\right]\!] ,\forall k \in\left[\![1, n_{i j}\right]\!]$$\\
+ 
+   $$y_{i, j, k}=\mu+\alpha_{i}+\beta_{j}+\varepsilon_{i, j, k}$$
+   
+\end {alertblock}
+  
+  \\ \\ \\
+  
+  
+  %\\ \\We have:\\$$\left.y_{i, j, k} \stackrel{i i %d}{\sim} \mathcal{N}\left(\mu_{i j}, \sigma^{2}\right), %\quad \forall i \in[\![1, I]\!] , \forall j %\in\left[\![1, J\right]\!] ,\forall k \in\left[\![1, %n_{i j}\right]\!]$$\\
+  % $$y_{i, j, k}=\mu+\alpha_{i}+\beta_{j}+\varepsilon_{i, %j, k}$$\\
+  \begin{itemize}\\ \\
+
+   \item $\operatorname{Cov}\left(\varepsilon_{i, j, k}, \varepsilon_{i^{\prime}, j^{\prime}, k^{\prime}}\right)=\sigma^{2} \delta_{i, i^{\prime}} \delta_{j, j^{\prime}} \delta_{k, k^{\prime}}$\\
+   \item$  \mu \in \mathbb{R}$: the average effect.\\
+   \item$\alpha_{i}$: the specific effect of level i for the first factor. \\
+   \item$\beta_{j}$:the specific effect of level j for the second factor.
+   \end{itemize}
 \end{frame}
 
-\begin{frame}{Balanced experiment plan}
-$\forall i=1,\dots,I$, $\forall j=1,\dots,J$: $n_{i,j}=k$
-$$
-n=IJK
-$$
-\begin{itemize}
-    \item $n_{i,j}$: observations for each $(i,j)$
-\end{itemize}
+
+
+
+
+
+
+
+
+
+\begin{frame}{}
+
+ 
+\textcolor{red}{\textbf{Note:}} \\
+\\
+\vspace{0.5cm}If the design of the experiment is not balanced (i.e., the $n_{i j}$ are different), the mathematical analysis is difficult.\\
+\vspace{0.3cm}
+We will therefore assume in order to facilitate the analysis:
+\textcolor{red}{$$\forall i \in[\![1, I]\!], \quad \forall j \in[\![1, J]\!], \quad n_{i j}=K $$}\\
+
+Finaly we get: $n=IJK$ observations.
 \end{frame}
 
-\begin{frame}{Design matrix}
-Our design matrix:
 
-$$
-X=[\mathcal{I}_n,\mathbb{I}_{C_1},\dots,\mathbb{I}_{C_I}\mathbb{I}_{D_1},\dots,\mathbb{I}_{D_J}]
-$$
+\begin{frame}{}   
+We can write the model in matrix form just by  following a usual approach that is least squares:\\
 
-\begin{itemize}
-    \item $\mathbb{I}_{C_I}$: Indicators of modalities of the first factors
-    \item $\mathbb{I}_{D_J}$: Indicators of modalities of the second factors
-\end{itemize}
+\begin{alertblock}{}
+\vspace{1cm}
+\textcolor{red}{$$X=\left[\begin{array}{lllllll}
+\mathbb{1}_{n} & \mathbb{1}_{C_{1}} & \ldots & \mathbb{1}_{C_{I}} & \mathbb{1}_{D_{1}} & \ldots & \mathbb{1}_{D_{J}}
+\end{array}\right] \in \mathbb{R}^{n \times(1+I+J)}$$}
+\end{alertblock}\\
+Where:\\
+$$\operatorname{rang}(X)=I+J+1-2=I+J-1 \text { et } \mathbb{1}_{n}=(1, \ldots, 1)^{\top}$$
+
 \end{frame}
+
 
 \begin{frame}{Design matrix}
 $$X=\left[\begin{array}{llllll}
-1 & 0 & 0 & 1 & 0 & 0\\
-1 & 0 & 0 & 0 & 1 & 0\\
-1 & 0 & 0 & 1 & 0 & 0\\
-1 & 0 & 0 & 1 & 0 & 0\\
-1 & 0 & 0 & 0 & 0 & 0\\
-1 & 0 & 0 & 0 & 0 & 0\\
-1 & 0 & 0 & 0 & 0 & 0\\
-. & . & . & . & . & .\\
-. & . & . & . & . & .\\
-. & . & . & . & . & .\\
+1 & 0  & 1 & 0 \\
+1 & 0  & 1 & 0 \\
+1 & 0  & 1 & 0 \\
+1 & 0  & 0 & 1 \\
+1 & 0  & 0 & 1 \\
+1 & 0  & 0 & 1 \\
+0 & 1  & 1 & 0 \\
+. & . &  . & . \\
+. & . &  . & . \\
+. & . &  . & . \\
 \end{array}\right]\hspace{1cm} y=\left[\begin{array}{l}
 6\\
 7\\
 8\\
 1\\
 2\\
-3\\
+3\\    %we removed the fourth element in order to have                                    n_ij=3
 1\\
 .\\
 .\\
@@ -158,17 +264,61 @@ $$X=\left[\begin{array}{llllll}
 \end{array}\right]
 $$
 \begin{itemize}
-    \item 27 rows
+    \item 3*4=12 rows
     \item Columns of X: $(J_1,J_2,J_3,V_1,V_2,V_3)$
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Application}
-\begin{figure}[!tbp]
-\includegraphics[width=8cm]{figure.pdf}
-\vspace{.35cm}
-\caption{Violin plot to compare the number of bicycle that cross the totem}
-\label{fig:f1}
-\end{figure}
+
+
+
+
+
+
+
+\begin{frame}{Definition}
+\begin{alertblock}{}
+$$\underset{(\mu, \alpha, \beta) \in \mathbb{R} \times \mathbb{R}^{I} \times \mathbb{R}^{J}}{\arg \min } \frac{1}{2} \sum_{i=1}^{I} \sum_{j=1}^{J} \sum_{k=1}^{K}\left(y_{i, j, k}-\mu-\alpha_{i}-\beta_{j}\right)^{2}$$
+$$\text {s.c.} \quad \sum_{i=1}^{I} \alpha_{i}=0$$
+ $$\hspace{0.83cm} \sum_{j=1}^{J} \beta_{j}=0$$
+\end{alertblock}
 \end{frame}
-\end{document}
+
+
+
+
+
+
+
+
+\begin{frame}{}
+For this problem we get the following Lagrangian:
+\vspace{1cm}
+\textcolor{red}{$$\mathcal{L}\left(\mu, \alpha, \beta, \lambda_{\alpha}, \lambda_{\beta}\right)=\frac{1}{2} \sum_{i=1}^{I} \sum_{j=1}^{J} \sum_{k=1}^{K}\left(y_{i, j, k}-\mu-\alpha_{i}-\beta_{j}\right)^{2}+\lambda_{\alpha}\left(\sum_{i=1}^{I} \alpha_{i}\right)+\lambda_{\beta}\left(\sum_{j=1}^{J} \beta_{j}\right)$$}
+
+\end{frame}
+
+
+\begin{frame}{}
+We should solve the following system:
+\vspace{1cm}
+$$\left\{\begin{array}{l}
+\frac{\partial \mathcal{L}}{\partial \mu}=0 \\
+\frac{\partial \mathcal{L}}{\partial \alpha}=0 \\
+\frac{\partial \mathcal{L}}{\partial \beta}=0 \\
+\frac{\partial \mathcal{L}}{\partial \lambda_{\alpha}}=0 \\
+\frac{\partial \mathcal{L}}{\partial \lambda_{\beta}}=0
+\end{array}\right.$$
+\end{frame}
+
+
+\begin{frame}{}
+We get as results:
+\vspace{0.5cm}
+$$\frac{\partial \mathcal{L}}{\partial \mu}=0 \Longrightarrow n \widehat{\mu}=\sum_{i=1}^{I} \sum_{j=1}^{J} \sum_{k=1}^{K} y_{i, j, k} \Longrightarrow \widehat{\mu}=\bar{y}_{n}$$
+\vspace{0.5cm}
+$$\hspace{0.8cm}\frac{\partial \mathcal{L}}{\partial \alpha}=0 \Longrightarrow \forall i \in[1, I], \quad \widehat{\alpha}_{i}=& \underbrace{\bar{y}_{i,:,}}_{=\frac{1}{J K} \sum_{j=1}^{N} \sum_{k=1}^{K} y_{i, j, k}}-\widehat{\mu}$$
+\vspace{0.5cm}
+$$\hspace{0.8cm}\frac{\partial \mathcal{L}}{\partial \beta}=0 \Longrightarrow \forall j \in[1, J], \widehat{\beta}_{j}=& \underbrace{\bar{y}_{:, j, \vdots}}_{=\frac{1}{I K}} \sum_{i=1}^{I} \sum_{k=1}^{K} y_{i, j, k}-\widehat{\mu}$$
+\end{frame}
+
