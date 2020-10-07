@@ -322,3 +322,63 @@ $$\hspace{0.8cm}\frac{\partial \mathcal{L}}{\partial \alpha}=0 \Longrightarrow \
 $$\hspace{0.8cm}\frac{\partial \mathcal{L}}{\partial \beta}=0 \Longrightarrow \forall j \in[1, J], \widehat{\beta}_{j}=& \underbrace{\bar{y}_{:, j, \vdots}}_{=\frac{1}{I K}} \sum_{i=1}^{I} \sum_{k=1}^{K} y_{i, j, k}-\widehat{\mu}$$
 \end{frame}
 
+
+
+
+
+
+
+
+
+
+\begin{frame}{}
+Associated predictor:
+\vspace{0.5cm}
+$$\widehat{y_{i j}} &=\widehat{\mu}+\widehat{\alpha_{i}}+\widehat{\beta}_{j}$$ \\
+$$\hspace{0.89cm}&=\bar{y}_{i,:,:}+\bar{y}_{:, j,:}-\widehat{\mu} \\
+$$\hspace{0.89cm}&=\bar{y}_{i,:,:}+\bar{y}_{:, j,:}-\bar{y}_{n}$$
+
+\end{frame}
+
+\begin{frame}{}
+The affected unbiased estimator is:
+\vspace{1cm}
+$$\widehat{\sigma^{2}}=\frac{1}{n-(I+J-1)} \sum_{i=1}^{I} \sum_{j=1}^{J} \sum_{k=1}^{K}\left(\widehat{y_{i j}}-y_{i, j, k}\right)^{2}$$
+\vspace{0.5cm}
+
+The estimator $\sigma^{2}$ is:
+\vspace{1cm}
+$$\hspace{-5cm}\mathbb{E}\left(\widehat{\sigma^{2}}\right)=\sigma^{2}$$
+\end{frame}
+
+
+
+
+
+
+
+
+\begin{frame}
+
+Global test:
+$$\text {\textbf {Facteur } 1:} H_{0}: "_{\alpha_{1}}=\alpha_{2}=\cdots=\alpha_{I} "$$
+
+
+$$\text { \textbf{Facteur } 2:} H_{0}: " \beta_{1}=\beta_{2}=\cdots=\beta_{J} "$$
+
+\end{frame}
+
+\begin{frame}{}
+For factor 1:
+\vspace{0.5cm}
+$$F_{o b s}=\frac{1}{\widehat{\sigma^{2}}} \frac{K J}{(I-1)} \sum_{i=1}^{I}\left(\bar{y}_{i, ; ;:}-\bar{y}_{n}\right)^{2} \sim \mathcal{F}_{n-(I+J-1)}^{I-1}$$
+
+Test:
+$F_{\text {obs}}>\mathcal{F}_{n-(I+J-1)}^{I-1}(1-\alpha)$
+\end{frame}
+
+
+\end{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
