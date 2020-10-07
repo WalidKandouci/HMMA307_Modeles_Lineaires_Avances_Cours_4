@@ -1,14 +1,4 @@
-\documentclass[unknownkeysallowed]{beamer}
-\usepackage[french,english]{babel}
-\input{Beamer_js}
-\input{shortcuts_js}
-%\usepackage{./OrganizationFiles/tex/sty/shortcuts_js}
-\usepackage{csquotes}
-
-\graphicspath{{./images/}}
-
-\addbibresource{Bibliographie.bib}
-\usepackage{enumerate}
+\documentclass{beamer}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8x]{inputenc}
@@ -25,67 +15,49 @@
 \usepackage{tikz}
 
 
+\mode<presentation> {
+\usetheme{AnnArbor}
 
+\setbeamercovered{transparent}
+\definecolor{rouge}{RGB}{255,0,0}
+\definecolor{almond}{rgb}{0.94, 0.87, 0.8}
+\definecolor{blue(pigment)}{rgb}{0.2, 0.2, 0.6}
+\definecolor{or}{RGB}{255,204,0}
+\definecolor{cerise}{rgb}{0.87, 0.19, 0.39}
+\definecolor{fandango}{rgb}{0.71, 0.2, 0.54}
+\setbeamercolor{structure}{fg=rouge,bg=or}
+\setbeamercolor{titlelike}{fg=noir,bg=or}
+\setbeamercolor{frametitle}{fg=blue,bg=or}
+\setbeamercolor{item}{fg=rouge,bg=or}
 
+}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\title{ Anova2F}
+\author{\color{rouge} Khalifi Oumayma\\Walid Kandouci\\ Abdestar SAHBANE\\\color{fandango} M2 MIND ET BIOSTAT}
 
+\institute{Faculté des sciences Montpellier}
 
-
+\date{\today}
 
 
 
 
 \begin{document}
 
-
-\begin{frame}[noframenumbering]
-\thispagestyle{empty}
-\bigskip
-\bigskip
-\begin{center}{
-\LARGE\color{marron}
-\textbf{HMMA 307 : Advanced Linear Modeling}
-\textbf{ }\\
-\vspace{0.5cm}
-}
-
-\color{marron}
-\textbf{Chapter 4 : ANOVA 2 Factors}
-\end{center}
-
-\vspace{0.5cm}
-
-\begin{center}
-\textbf{KHALIFI OUMAYMA \ KANDOUCI WALID \ SAHBANE ABDESSTAR } \\
-\vspace{0.1cm}
-\url{https://github.com/WalidKandouci/HMMA307_Modeles_Lineaires_Avances_Cours_5}\\
-\vspace{0.5cm}
-Université de Montpellier \\
-\end{center}
-
-\centering
-\includegraphics[width=0.13\textwidth]{Logo.pdf}
+% page titre
+\begin{frame}
+\titlepage
 \end{frame}
-
-
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%             Headers               %%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 % plan de la présentation
 \begin{frame}
 \frametitle{Summary}
 \tableofcontents
 \end{frame}
-
-
 \section{Introduction}
 \begin{frame}
 \frametitle{Introduction}
@@ -96,11 +68,6 @@ In this paragraph, we will be looking at two-way ANOVA, an extension of the one-
 The two-way ANOVA not only aims at assessing the main effect of each independent variable but also if there is any interaction between them.
 \end{frame}
 
-
-
-
-
-
 \section{Exemple}
 
 
@@ -108,42 +75,22 @@ The two-way ANOVA not only aims at assessing the main effect of each independent
 \frametitle{introductory example:}
 Suppose we have two judges who do a tasting of 2 different wines, called Wine 1 and Wine 2 such as:\\
 - Judge 1 does 7 tastings: 3 for Wine 1 and 4 for Wine 2.\\
-- The Judge 2 does 4 tastings: 3 for Wine 1 and 1 for Wine 2.
+- The judge 2 does 4 tastings: 3 for Wine 1 and 1 for Wine 2.
 \end{frame}
 
 \begin{frame}
 \frametitle{introductory example:}
 We summarize the example in the form of the following table:\\
 
-\begin{center}
-\begin{tabular}{ |c|c|c|  }
-\hline
- & Wine 1 & Wine 2  \\
-\hline
-Judge 1 & [6,7,8] & [1,2,3,5]  \\
-\hline
-Judge 2 & [3,8,4] & [1]  \\
-
-\hline
-\end{tabular}
-\end{center}
 
 
 
-
-
-
-
-
-
-If factor 1 is Judge 2 and factor 2 is Win 1, we have :$$y_{211}=3, y_{212}=8, y_{213}=4 $$
+If factor 1 is Judge 2 and factor 2 is Vin 1, we have :$$y_{211}=3, y_{212}=8, y_{213}=4 $$
 Here, we have: \\$$n= n_{1 1}+n_{1 2}+n_{2 1}+n_{2 2}=3+4+3+1=11$$
 we must adapt the table so as to have $n_{ij}$ = constant fixed $\forall i,j\in[\![1, 2]\!]$.
  This is done either by eliminating or adding elements.
 
 \end{frame}
-
-% partie 2 : page 2
 
 \subsection{}
 \begin{frame}
@@ -201,14 +148,6 @@ $$n=\sum_{i=1}^{I} \sum_{j=1}^{J} n_{i j}$$
 \end{frame}
 
 
-
-
-
-
-
-
-
-
 \begin{frame}{}
 
  
@@ -235,38 +174,6 @@ We can write the model in matrix form just by  following a usual approach that i
 Where:\\
 $$\operatorname{rang}(X)=I+J+1-2=I+J-1 \text { et } \mathbb{1}_{n}=(1, \ldots, 1)^{\top}$$
 
-\end{frame}
-
-
-\begin{frame}{Design matrix}
-$$X=\left[\begin{array}{llllll}
-1 & 0  & 1 & 0 \\
-1 & 0  & 1 & 0 \\
-1 & 0  & 1 & 0 \\
-1 & 0  & 0 & 1 \\
-1 & 0  & 0 & 1 \\
-1 & 0  & 0 & 1 \\
-0 & 1  & 1 & 0 \\
-. & . &  . & . \\
-. & . &  . & . \\
-. & . &  . & . \\
-\end{array}\right]\hspace{1cm} y=\left[\begin{array}{l}
-6\\
-7\\
-8\\
-1\\
-2\\
-3\\    %we removed the fourth element in order to have                                    n_ij=3
-1\\
-.\\
-.\\
-.\\
-\end{array}\right]
-$$
-\begin{itemize}
-    \item 3*4=12 rows
-    \item Columns of X: $(J_1,J_2,J_3,V_1,V_2,V_3)$
-\end{itemize}
 \end{frame}
 
 
@@ -325,60 +232,4 @@ $$\hspace{0.8cm}\frac{\partial \mathcal{L}}{\partial \beta}=0 \Longrightarrow \f
 
 
 
-
-
-
-
-
-
-\begin{frame}{}
-Associated predictor:
-\vspace{0.5cm}
-$$\widehat{y_{i j}} &=\widehat{\mu}+\widehat{\alpha_{i}}+\widehat{\beta}_{j}$$ \\
-$$\hspace{0.89cm}&=\bar{y}_{i,:,:}+\bar{y}_{:, j,:}-\widehat{\mu} \\
-$$\hspace{0.89cm}&=\bar{y}_{i,:,:}+\bar{y}_{:, j,:}-\bar{y}_{n}$$
-
-\end{frame}
-
-\begin{frame}{}
-The affected unbiased estimator is:
-\vspace{1cm}
-$$\widehat{\sigma^{2}}=\frac{1}{n-(I+J-1)} \sum_{i=1}^{I} \sum_{j=1}^{J} \sum_{k=1}^{K}\left(\widehat{y_{i j}}-y_{i, j, k}\right)^{2}$$
-\vspace{0.5cm}
-
-The estimator $\sigma^{2}$ is:
-\vspace{1cm}
-$$\hspace{-5cm}\mathbb{E}\left(\widehat{\sigma^{2}}\right)=\sigma^{2}$$
-\end{frame}
-
-
-
-
-
-
-
-
-\begin{frame}
-
-Global test:
-$$\text {\textbf {Facteur } 1:} H_{0}: "_{\alpha_{1}}=\alpha_{2}=\cdots=\alpha_{I} "$$
-
-
-$$\text { \textbf{Facteur } 2:} H_{0}: " \beta_{1}=\beta_{2}=\cdots=\beta_{J} "$$
-
-\end{frame}
-
-\begin{frame}{}
-For factor 1:
-\vspace{0.5cm}
-$$F_{o b s}=\frac{1}{\widehat{\sigma^{2}}} \frac{K J}{(I-1)} \sum_{i=1}^{I}\left(\bar{y}_{i, ; ;:}-\bar{y}_{n}\right)^{2} \sim \mathcal{F}_{n-(I+J-1)}^{I-1}$$
-
-Test:
-$F_{\text {obs}}>\mathcal{F}_{n-(I+J-1)}^{I-1}(1-\alpha)$
-\end{frame}
-
-
 \end{document}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
